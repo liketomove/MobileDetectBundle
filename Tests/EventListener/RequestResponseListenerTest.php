@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -696,11 +697,11 @@ class RequestResponseListenerTest extends TestCase
      * @param string $method  Method
      * @param array  $headers Headers
      *
-     * @return \Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent
+     * @return \Symfony\Component\HttpKernel\Event\ViewEvent
      */
     private function createGetResponseEvent($content, $method = 'GET', $headers = array())
     {
-        $event = new GetResponseForControllerResultEvent(
+        $event = new ViewEvent(
             $this->createMock('Symfony\Component\HttpKernel\HttpKernelInterface'),
             $this->request,
             HttpKernelInterface::MASTER_REQUEST,
