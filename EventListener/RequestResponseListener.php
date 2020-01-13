@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * Request and response listener
@@ -96,11 +97,11 @@ class RequestResponseListener
     /**
      * Handles the Request
      *
-     * @param GetResponseEvent $event
+     * @param RequestEvent $event
      *
      * @return null
      */
-    public function handleRequest(GetResponseEvent $event)
+    public function handleRequest(RequestEvent $event)
     {
         // only handle master request, do not handle sub request like esi includes
         // If the device view is "not the mobile view" (e.g. we're not in the request context)
