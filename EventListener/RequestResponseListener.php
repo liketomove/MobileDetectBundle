@@ -236,7 +236,7 @@ class RequestResponseListener
             $redirectUrl = $this->getRedirectUrl($request, $this->deviceView->getViewType());
         } else {
             if (true === $this->isFullPath) {
-                $redirectUrl = $request->getUriForPath($request->getPathInfo());
+                $redirectUrl = $request->getUriForPath($request->getPathInfo() ?? 'path');
                 $queryParams = $request->query->all();
                 if (array_key_exists($this->deviceView->getSwitchParam(), $queryParams)) {
                     unset($queryParams[$this->deviceView->getSwitchParam()]);
@@ -316,7 +316,7 @@ class RequestResponseListener
     protected function getRoutingOption($routeName, $optionName)
     {
         $option = null;
-        $route = $this->router->getRouteCollection()->get($routeName);
+        $route = $this->router->getRouteCollection()->get((isset($routeName) && !is_null($routeName)) ? $routeName : 'test');
 
         if ($route instanceof Route) {
             $option = $route->getOption($optionName);
