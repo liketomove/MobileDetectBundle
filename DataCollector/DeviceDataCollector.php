@@ -16,6 +16,7 @@ use SunCat\MobileDetectBundle\Helper\DeviceView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Throwable;
 
 /**
  * DeviceDataCollector class
@@ -48,16 +49,16 @@ class DeviceDataCollector extends DataCollector
     /**
      * Collects data for the given Request and Response.
      *
-     * @param Request    $request   A Request instance
-     * @param Response   $response  A Response instance
-     * @param \Exception $exception An Exception instance
+     * @param Request $request A Request instance
+     * @param Response $response A Response instance
+     * @param Throwable|null $exception An Exception instance
      *
      * @api
      */
     public function collect(
         Request $request,
         Response $response,
-        \Exception $exception = null
+        \Throwable $exception = null
     ) {
         $this->data['currentView'] = $this->deviceView->getViewType();
         $this->data['views'] = array(
